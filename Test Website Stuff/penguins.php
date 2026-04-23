@@ -1,5 +1,5 @@
 <?php
-// PHP 8.4 logic for handling Quiz Submission
+// this is quick file
 $quiz_submitted = false;
 $score = 0;
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
     }
     $quiz_submitted = true;
 
-    // MySQL connection (Update with your credentials)
+    
     $host = 'localhost';
     $db   = 'penguin_db';
     $user = 'root';
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
         $stmt = $pdo->prepare("INSERT INTO quiz_results (score) VALUES (?)");
         $stmt->execute([$score]);
     } catch (PDOException $e) {
-        // Silently handle or log error
+    
     }
 }
 ?>

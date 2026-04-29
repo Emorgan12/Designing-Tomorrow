@@ -3,6 +3,7 @@
 ## Required Software
 
 - Node.js
+- Python
 
 ## Setup
 

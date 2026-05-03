@@ -8,7 +8,7 @@
 ## Setup
 
 - cd frontend
-- pnpm build
+- pnpm install
 - pnpm run dev
 
 - cd backend

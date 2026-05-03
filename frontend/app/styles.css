@@ -6,6 +6,7 @@
   max-width: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .container div {
@@ -13,23 +14,28 @@
   width: fit-content;
   margin: 10px;
   padding: 10px;
-  text-align: center;  
+  text-align: center;
   font-size: 30px;
 }
 
-.main{
+.main {
   width: 100%;
 }
 
-.fact-file{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+.fact-file {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
-.quiz{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
+.quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50vh;
+}
+
+.hidden {
+  display: none;
 }

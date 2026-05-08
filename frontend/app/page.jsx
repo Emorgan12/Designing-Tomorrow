@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ID_TO_ANIMAL = {
-  "1501149956": { name: "Penguin", img: "/images/placeholder.jpg" },
-  "2948510468": { name: "Elephant", img: "/images/placeholder.jpg" },
-  "0028578564": { name: "Tiger", img: "/images/placeholder.jpg" },
+  "1501149956": { name: "Emperor Penguin", slug: "penguin", img: "/images/placeholder.jpg" },
+  "2948510468": { name: "Savannah Elephant", slug: "elephant", img: "/images/placeholder.jpg" },
+  "0028578564": { name: "Bengal Tiger", slug: "tiger", img: "/images/placeholder.jpg" },
 };
 
 export default function Home() {
+  const router = useRouter();
   const [scanning, setScanning] = useState(false);
   const [animal, setAnimal] = useState(null);
   const [buffer, setBuffer] = useState("");
@@ -27,9 +29,13 @@ export default function Home() {
       const id = buffer.trim();
       setBuffer("");
       setScanning(false);
-      if (id) {
-        const matched = ID_TO_ANIMAL[id] || { name: `Unknown (${id})`, img: "/images/placeholder.jpg" };
-        setAnimal(matched);
+      if (!id) return;
+
+      const matched = ID_TO_ANIMAL[id];
+      if (matched?.slug) {
+        router.push(`/animals/${matched.slug}`);
+      } else {
+        setAnimal({ name: `Unknown (${id})`, img: "/images/placeholder.jpg", unknown: true });
       }
     }
   };
@@ -53,28 +59,14 @@ export default function Home() {
           </>
         )}
 
-        {animal && (
+        {animal && animal.unknown && (
           <div className="container">
             <div className="fact-file">
               <div>
                 <h2>{animal.name}</h2>
                 <Image src={animal.img} alt={animal.name} width={300} height={300} />
               </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                venenatis vulputate lorem. Maecenas vestibulum mollis diam.
-              </p>
-            </div>
-            <div className="quiz">
-              <h2>Quiz</h2>
-              <h3>Question 1: What is the capital of France?</h3>
-              <ul>
-                <li>A) Berlin</li>
-                <li>B) Madrid</li>
-                <li>C) Paris</li>
-                <li>D) Rome</li>
-              </ul>
+              <p>Scanned NFC tag did not match a known animal. Please try again with a valid tag.</p>
             </div>
           </div>
         )}

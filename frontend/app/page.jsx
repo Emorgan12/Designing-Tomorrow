@@ -5,9 +5,19 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const ID_TO_ANIMAL = {
-  "1501149956": { name: "Emperor Penguin", slug: "penguin", img: "/images/placeholder.jpg" },
-  "2948510468": { name: "Savannah Elephant", slug: "elephant", img: "/images/placeholder.jpg" },
-  "0028578564": { name: "Bengal Tiger", slug: "tiger", img: "/images/placeholder.jpg" },
+  "1501149956": { id: "1501149956", name: "Emperor Penguin", slug: "penguin", img: "/images/penguin.jpg" },
+  "2948510468": { id: "2948510468", name: "Savannah Elephant", slug: "elephant", img: "/images/elephant.jpg" },
+  "0028578564": { id: "0028578564", name: "Bengal Tiger", slug: "tiger", img: "/images/tiger.jpg" },
+};
+
+const normalizeId = (value) => value?.replace(/\D/g, "").replace(/^0+/, "") ?? "";
+
+const getAnimalFromId = (value) => {
+  const trimmed = value?.trim();
+  if (!trimmed) return null;
+  if (ID_TO_ANIMAL[trimmed]) return ID_TO_ANIMAL[trimmed];
+  const normalized = normalizeId(trimmed);
+  return Object.values(ID_TO_ANIMAL).find((animal) => normalizeId(animal.id) === normalized) || null;
 };
 
 export default function Home() {
@@ -31,7 +41,7 @@ export default function Home() {
       setScanning(false);
       if (!id) return;
 
-      const matched = ID_TO_ANIMAL[id];
+      const matched = getAnimalFromId(id);
       if (matched?.slug) {
         router.push(`/animals/${matched.slug}`);
       } else {
@@ -64,7 +74,7 @@ export default function Home() {
             <div className="fact-file">
               <div>
                 <h2>{animal.name}</h2>
-                <Image src={animal.img} alt={animal.name} width={300} height={300} />
+                <Image src={animal.img} alt={animal.name} width={300} height={300} loading="eager" unoptimized />
               </div>
               <p>Scanned NFC tag did not match a known animal. Please try again with a valid tag.</p>
             </div>

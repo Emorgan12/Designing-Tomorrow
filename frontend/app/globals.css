@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1d4f99;
+  --foreground: #f5f5f8;
 }
 
 @theme inline {
@@ -24,6 +24,7 @@ html, body, #__next {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: DodgerBlue;
 }
 
 body {

@@ -13,3 +13,6 @@
 
 - cd backend
 - pip install -r requirements.txt
+
+## For arduino
+- python3 rfid_flash.py

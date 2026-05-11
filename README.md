@@ -34,6 +34,8 @@ Next, in another terminal window (ensure you are in the correct folder), run thi
 
 With everything attatched and setup, you will be able to open the website page and click 'Scan Animal'. Then hold up the bottom of an animal model onto the RFID reader and it will automatically take you to the page for the respective animal. After this you will be able to read all the information and take part in the quiz. At any time you can switch animal pages by going to the bottom of the page and clicking 'Scan New Animal' and then you will be able to repleat the process again. When you scan the animal on the RFID reader, the Arduino will flash its light 3 times to confirm this has worked, and you will also hear a confirmation noise.
 
+If you do not have the animal models available, you will be able to access each page by adding /animals/penguin or /animals/elephant or /animals/tiger to the end of the URL (eg http://localhost:3000/animals/penguin).
+
 ## Required Software
 
 For this website to function, you will need to have Node.js, pnpm, Python and Arduino Ide installed on your Pi.

@@ -1,28 +1,34 @@
-import keyboard
+import evdev
 import serial
 import time
 
 # --- Config ---
-ARDUINO_PORT = 'COM4'   # Change to match your Arduino (check Device Manager)
-BAUD_RATE    = 9600
+RFID_DEVICE_PATH = '/dev/input/event7'
+ARDUINO_PORT     = '/dev/ttyACM0'
+BAUD_RATE        = 9600
 # --------------
 
-arduino = serial.Serial(ARDUINO_PORT, BAUD_RATE, timeout=1)
-time.sleep(2)  # Wait for Arduino to boot
+def main():
+    rfid = evdev.InputDevice(RFID_DEVICE_PATH)
+    rfid.grab()  # Prevents card data typing into other apps
+    arduino = serial.Serial(ARDUINO_PORT, BAUD_RATE, timeout=1)
+    time.sleep(2)
 
-current_card = []
-print("Listening for RFID scans...")
+    print("Listening for RFID scans...")
+    current_card = []
 
-def on_key(event):
-    global current_card
-    if event.name == 'enter':
-        if current_card:
-            card_id = ''.join(current_card)
-            print(f"Card scanned: {card_id}")
-            arduino.write(b'F')
-            current_card = []
-    elif len(event.name) == 1:
-        current_card.append(event.name)
+    for event in rfid.read_loop():
+        if event.type == evdev.ecodes.EV_KEY:
+            key = evdev.categorize(event)
+            if key.keystate == evdev.KeyEvent.key_down:
+                if key.keycode == 'KEY_ENTER':
+                    card_id = ''.join(current_card)
+                    print(f"Card scanned: {card_id}")
+                    arduino.write(b'F')
+                    current_card = []
+                else:
+                    digit = key.keycode.replace('KEY_', '')
+                    current_card.append(digit)
 
-keyboard.on_press(on_key)
-keyboard.wait()  # Keeps script running
+if __name__ == '__main__':
+    main()

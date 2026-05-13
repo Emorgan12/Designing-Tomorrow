@@ -1,1 +1,1 @@
-This is the code required to get the functionality of the Arduino. See [here](README.md) for more details.
+This is the code required to get the functionality of the Arduino. If both of these pieces of code are run correctly, and an RFID reader is connected via USB, then the light on the Arduino (plugged in pin 13) will flash 3 times. Detailed instructions are in the installation guide.

@@ -1,1 +1,1 @@
-All models here were made by Ruslan and have been painted by Lucy for the final result. 
+Here are all the 3D models required for the final prototype, along with the correct ones in order to print them off using a 3D printer.

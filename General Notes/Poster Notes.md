@@ -1,0 +1,10 @@
+Animals all over the world are dying because of human actions. Our current generations lack an understanding of how to prevent this. Our goal was to create an experience which is not only informative, but also engaging and enjoyable for families of any ages. We specifically wanted it to be engaging to children, so we have chosen to have an accessible experience, including a website and animal models to interact with.
+
+Our immersive experience is an online interaction, where the user will pick up the animal model, and hold the bottom over our scanner which is encased in wood, and then will be able to interact with the website which appears on the screen. There will be information with a quiz at the end to make sure kids are engaged and families can find it educational.
+
+These charming animal models were created using the 3D software Blender. After the modelling process, the designs were successfully produced using a 3D printer with plastic material. The animal designs were fully developed and designed by our team. ​  
+In addition, we designed and built a mobile platform with an integrated scanner to make the system easy to move and use. The platform allows the model to be placed upside down for efficient scanning. It was constructed from wood, with a transparent plastic top layer to support the scanning process and clearly demonstrate its function.​
+We have used a Raspberry Pi for the computer behind the website, and to code the website we have used PHP, JavaScript, CSS and Python. As for the programs required to run it, we need Node.js and FastAPI. To scan the animals we have used NFC tags with a USB RFID Reader connected to the Pi. We have also used an Arduino to flash a light every time the user scans a model.
+
+We are very happy with how the final result has turned out, and believe the experience is highly engaging to a user of any age, especially children. Our website is intuitive with an informative quiz, however, we would have liked to incorporate the Arduino more to create sounds if we had had more time. Overall we are happy with the result and believe it to be engaging to any user.
+

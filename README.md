@@ -24,8 +24,6 @@ cd frontend
 pnpm install
 pnpm run dev
 
-cd backend
-pip install -r requirements.txt
 ```
 
 Now open [the Arduino code](arduino_light/arduino_light.ino) in the Arduino IDE which was installed in the setup and verify it. Then upload it to the Arduino.

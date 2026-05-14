@@ -3,14 +3,20 @@ import serial
 import time
 
 # --- Config ---
-RFID_DEVICE_PATH = '/dev/input/event7'
-ARDUINO_PORT     = '/dev/ttyACM0'
-BAUD_RATE        = 9600
+ARDUINO_PORT = '/dev/ttyACM0'
+BAUD_RATE    = 9600
 # --------------
 
+def find_rfid():
+    for path in evdev.list_devices():
+        dev = evdev.InputDevice(path)
+        if 'IC' in dev.name or 'RFID' in dev.name or 'HID' in dev.name:
+            print(f"Found RFID reader: {dev.name} at {path}")
+            return dev
+    raise Exception("No RFID reader found — is it plugged in?")
+
 def main():
-    rfid = evdev.InputDevice(RFID_DEVICE_PATH)
-    rfid.grab()  # Prevents card data typing into other apps
+    rfid = find_rfid()
     arduino = serial.Serial(ARDUINO_PORT, BAUD_RATE, timeout=1)
     time.sleep(2)
 
